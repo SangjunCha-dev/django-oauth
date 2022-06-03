@@ -2,6 +2,7 @@
 venv/
 
 # temp
+.vscode
 __pycache__/
 db.sqlite3
 secrets_base.json
