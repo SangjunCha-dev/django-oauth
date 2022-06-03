@@ -31,11 +31,11 @@
 
 ## 3. oauth 사이트 설정 및 설명
 
-- [Django 소셜로그인(oauth) kakao 연동](https://sangjuncha-dev.github.io/posts/framework/django/2021-12-29-django-oauth-facebook/)
-- [Django 소셜로그인(oauth) naver 연동](https://sangjuncha-dev.github.io/posts/framework/django/2021-12-29-django-oauth-facebook/)
-- [Django 소셜로그인(oauth) google 연동](https://sangjuncha-dev.github.io/posts/framework/django/2021-12-29-django-oauth-facebook/)
+- [Django 소셜로그인(oauth) kakao 연동](https://sangjuncha-dev.github.io/posts/framework/django/2021-10-11-django-oauth-kakao/)
+- [Django 소셜로그인(oauth) naver 연동](https://sangjuncha-dev.github.io/posts/framework/django/2021-11-12-django-oauth-naver/)
+- [Django 소셜로그인(oauth) google 연동](https://sangjuncha-dev.github.io/posts/framework/django/2021-11-22-django-oauth-google/)
 - [Django 소셜로그인(oauth) facebook 연동](https://sangjuncha-dev.github.io/posts/framework/django/2021-12-29-django-oauth-facebook/)
-- [Django 소셜로그인(oauth) apple 연동](https://sangjuncha-dev.github.io/posts/framework/django/2021-12-29-django-oauth-facebook/)
+- [Django 소셜로그인(oauth) apple 연동](https://sangjuncha-dev.github.io/posts/framework/django/2021-12-28-django-oauth-apple/)
 
 ## 4. 서버 실행
 
