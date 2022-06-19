@@ -23,13 +23,9 @@ class CreateUserSerializer(serializers.Serializer):
         return data
 
     def create(self, validated_data):
-        user = UserModel.objects.create(
-            social_id=validated_data['social_id'],
-            social_type=validated_data['social_type'],
-            email=validated_data.get('email'),
-            phone=validated_data.get('phone'),
-            role=UserRoleModel.objects.get_or_create(id=2, name='user')[0]
-        )
+        validated_data['role'] = UserRoleModel.objects.get_or_create(id=2, name='user')[0]
+
+        user = UserModel.objects.create(**validated_data)
         user.save()
 
         return user
@@ -105,12 +101,13 @@ class RefreshTokenSerializer(serializers.Serializer):
         return data
 
 
-class UserInfoSerializers(serializers.ModelSerializer):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        if not settings.DEBUG:
-            setattr(self.Meta, 'read_only_fields', [*self.fields])
-
+class UserInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
         fields = ('social_id', 'social_type', 'email', 'phone', 'created_at', 'last_login')
+        read_only_fields = ('social_id', 'social_type', 'email', 'created_at', 'last_login')
+
+class UserInfoPhoneSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserModel
+        fields = ('phone',)
