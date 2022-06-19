@@ -40,7 +40,10 @@
 ## 4. 서버 실행
 
 ```
-python manage.py runserver localhost:8000
+> cd source
+> python manage.py makemigrations
+> python manage.py migrate
+> python manage.py runserver localhost:8000
 ```
 
 ## 5. client 테스트
