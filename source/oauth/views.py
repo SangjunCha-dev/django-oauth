@@ -1,8 +1,11 @@
+import requests
+import jwt
+import time
+
 from django.conf import settings
 from django.shortcuts import redirect
 from django.middleware.csrf import get_token
 from drf_yasg.utils import swagger_auto_schema
-
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -12,13 +15,8 @@ from .serializers import *
 from users.models import UserModel
 from users.views import LoginView, UserView
 
-import requests
-import jwt
-import time
 
-
-
-def _login_api(social_type: str, social_id: str, email: str=None, phone: str=None):
+def login_api(social_type: str, social_id: str, email: str=None, phone: str=None):
     '''
     회원가입 및 로그인
     '''
@@ -64,6 +62,7 @@ class KakaoLoginView(APIView):
         
         res = redirect(uri)
         return res
+
 
 class KakaoCallbackView(APIView):
     permission_classes = [AllowAny]
@@ -118,9 +117,8 @@ class KakaoCallbackView(APIView):
         user_email = kakao_account.get('email')
 
         # 회원가입 및 로그인
-        res = _login_api(social_type=social_type, social_id=social_id, email=user_email)
+        res = login_api(social_type=social_type, social_id=social_id, email=user_email)
         return res
-            
 
 
 naver_login_url = "https://nid.naver.com/oauth2.0/authorize"
@@ -144,6 +142,7 @@ class NaverLoginView(APIView):
         uri = f"{naver_login_url}?client_id={client_id}&redirect_uri={redirect_uri}&state={state}&response_type=code"
         res = redirect(uri)
         return res
+
 
 class NaverCallbackView(APIView):
     permission_classes = [AllowAny]
@@ -200,9 +199,8 @@ class NaverCallbackView(APIView):
         user_email = user_info.get('email')
 
         # 회원가입 및 로그인
-        res = _login_api(social_type=social_type, social_id=social_id, email=user_email)
+        res = login_api(social_type=social_type, social_id=social_id, email=user_email)
         return res
-
 
 
 google_login_url = "https://accounts.google.com/o/oauth2/v2/auth"
@@ -225,6 +223,7 @@ class GoogleLoginView(APIView):
 
         res = redirect(uri)
         return res
+
 
 class GoogleCallbackView(APIView):
     permission_classes = [AllowAny]
@@ -272,7 +271,7 @@ class GoogleCallbackView(APIView):
         user_email = user_info_json.get('email')
 
         # 회원가입 및 로그인
-        res = _login_api(social_type=social_type, social_id=social_id, email=user_email)
+        res = login_api(social_type=social_type, social_id=social_id, email=user_email)
         return res
 
 
@@ -357,9 +356,8 @@ class FacebookCallbackView(APIView):
         user_email = user_profile_json.get('email')
 
         # 회원가입 및 로그인
-        res = _login_api(social_type=social_type, social_id=social_id, email=user_email)
+        res = login_api(social_type=social_type, social_id=social_id, email=user_email)
         return res
-
 
 
 apple_base_url = "https://appleid.apple.com"
@@ -457,8 +455,9 @@ class AppleCallbackView(APIView):
         user_email = token_decode['email']
 
         # 회원가입 및 로그인
-        res = _login_api(social_type=social_type, social_id=social_id, email=user_email)
+        res = login_api(social_type=social_type, social_id=social_id, email=user_email)
         return res
+
 
 class AppleEndpoint(APIView):
     permission_classes = [AllowAny]

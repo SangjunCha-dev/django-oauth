@@ -1,14 +1,12 @@
+import datetime as dt
+import jwt
+
 from django.contrib.auth import authenticate
 from django.conf import settings
-
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .models import UserModel, UserRoleModel
-
-import datetime as dt
-import jwt
-
 
 
 class CreateUserSerializer(serializers.Serializer):
@@ -106,6 +104,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
         model = UserModel
         fields = ('social_id', 'social_type', 'email', 'phone', 'created_at', 'last_login')
         read_only_fields = ('social_id', 'social_type', 'email', 'created_at', 'last_login')
+
 
 class UserInfoPhoneSerializer(serializers.ModelSerializer):
     class Meta:
